@@ -103,19 +103,6 @@ export interface AdvanceFinalizeRequestDto {
   familyId?: number;
 }
 
-export interface RefundReceiptRequestDto {
-  buyerId: string;
-  orderNumber?: string;
-  toEmail?: string;
-  textHeader?: string;
-  textFooter?: string;
-  buyerCostCenterId?: string | null;
-  cashier?: string | null;
-  dateTimeOfIssue?: string | null;
-  settings?: CreateReceiptSettingsDto;
-  familyId?: number;
-}
-
 export interface CreateReceiptDraftRequestDto {
   orderNumber: string;
   buyerId: string;

@@ -87,15 +87,6 @@ export const handlers = [
     if (auth === 'Bearer forbidden') return HttpResponse.json(FORBIDDEN, { status: 403 });
     return HttpResponse.json({ correlationId: 'corr-1', refundReceipt: MOCK_RECEIPT_DETAILS, finalReceipt: MOCK_RECEIPT_DETAILS }, { status: 201 });
   }),
-  
-  http.post(`${BASE_URL}/receipt/:invoiceNumber/refund/full`, ({ request, params }) => {
-    const auth = request.headers.get('Authorization');
-    if (auth === 'Bearer invalid') return HttpResponse.json(UNAUTHORIZED, { status: 401 });
-    return HttpResponse.json({ 
-      correlationId: 'corr-refund', 
-      receipt: { ...MOCK_RECEIPT_DETAILS, invoiceNumber: `${params.invoiceNumber}-REFUND`, transactionType: 'refund' } 
-    }, { status: 201 });
-  }),
 
   http.post(`${BASE_URL}/receipt/:invoiceType/:transactionType`, ({ request, params }) => {
     const { transactionType } = params;

@@ -26,7 +26,6 @@ export type {
   BulkReceiptItemDto,
   CreateBulkReceiptRequestDto,
   AdvanceFinalizeRequestDto,
-  RefundReceiptRequestDto,
   CreateReceiptDraftRequestDto,
   UpdateReceiptDraftRequestDto,
   SendReceiptEmailRequestDto,

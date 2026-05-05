@@ -12,7 +12,6 @@ import type {
   CreateBulkReceiptResponseDto,
   AdvanceFinalizeRequestDto,
   AdvanceFinalizeResponseDto,
-  RefundReceiptRequestDto,
   SendReceiptEmailRequestDto,
   CreateReceiptDraftRequestDto,
   CreateDraftResponseDto,
@@ -82,21 +81,6 @@ export class ReceiptResource {
    */
   finalizeAdvance(payload: AdvanceFinalizeRequestDto): Promise<AdvanceFinalizeResponseDto> {
     return this.http.post<AdvanceFinalizeResponseDto>('/receipt/advance/finalize', payload);
-  }
-
-  /**
-   * POST /receipt/{invoiceNumber}/refund/full
-   * Perform a full refund of a previously issued receipt identified by its invoice number.
-   */
-  fullRefund(invoiceNumber: string, payload: RefundReceiptRequestDto): Promise<CreateReceiptResponseDto> {
-    return this.http.post<CreateReceiptResponseDto>(`/receipt/${invoiceNumber}/refund/full`, payload);
-  }
-
-  /**
-   * Alias for fullRefund() kept for backward compatibility.
-   */
-  refund(invoiceNumber: string, payload: RefundReceiptRequestDto): Promise<CreateReceiptResponseDto> {
-    return this.fullRefund(invoiceNumber, payload);
   }
 
   /**

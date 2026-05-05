@@ -1,7 +1,7 @@
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
 export type InvoiceType = 'normal' | 'training' | 'advance' | 'proforma' | 'copy';
-export type TransactionType = 'sale' | 'refund' | 'finalize';
+export type TransactionType = 'sale' | 'finalize';
 export type SortOrder = 'ASC' | 'DESC';
 
 /**

@@ -7,7 +7,7 @@ Official TypeScript SDK for the [Fiscomm Public API](https://api.fiscomm.rs). Su
 ## Installation
 
 ```bash
-npm install fiscomm-sdk
+npm install github:Fiscomm/fiscomm-sdk-ts
 ```
 
 > **Node.js ≥ 18** required (uses native `fetch`).
@@ -84,26 +84,7 @@ const created = await client.receipts.create('normal', 'sale', {
 console.log(created.receipt.invoiceNumber);
 ```
 
-### 2) Full refund po broju racuna
-
-```typescript
-const refunded = await client.receipts.fullRefund(created.receipt.invoiceNumber, {
-  buyerId: '10:123456789',
-  orderNumber: `REFUND-${Date.now()}`,
-});
-
-console.log(refunded.receipt.invoiceNumber, refunded.receipt.transactionType);
-```
-
-### 3) Refund alias (kompatibilnost)
-
-```typescript
-const refunded2 = await client.receipts.refund(created.receipt.invoiceNumber, {
-  buyerId: '10:123456789',
-});
-```
-
-### 4) Advance finalize tok
+### 2) Advance finalize tok
 
 ```typescript
 const finalized = await client.receipts.finalizeAdvance({
@@ -126,7 +107,7 @@ const finalized = await client.receipts.finalizeAdvance({
 console.log(finalized.refundReceipt.invoiceNumber, finalized.finalReceipt.invoiceNumber);
 ```
 
-### 5) Preporuke za bezbednost
+### 3) Preporuke za bezbednost
 
 - Ne upisujte API kljuceve direktno u kod.
 - Koristite env varijable (npr. FISCOMM_API_KEY).
@@ -140,7 +121,7 @@ console.log(finalized.refundReceipt.invoiceNumber, finalized.finalReceipt.invoic
 ```typescript
 const result = await client.receipts.create(
   invoiceType: InvoiceType,      // 'normal' | 'training' | 'advance' | 'proforma' | 'copy'
-  transactionType: TransactionType, // 'sale' | 'refund' | 'finalize'
+  transactionType: TransactionType, // 'sale' | 'finalize'
   payload: CreateReceiptRequestDto,
 );
 // Returns: CreateReceiptResponseDto
@@ -169,15 +150,6 @@ const result = await client.receipts.createBulk(
 ```typescript
 const result = await client.receipts.finalizeAdvance(payload: AdvanceFinalizeRequestDto);
 // Returns: AdvanceFinalizeResponseDto (refundReceipt, finalReceipt)
-```
-
-#### Full refund by invoice number
-```typescript
-const result = await client.receipts.fullRefund('RX-123', {
-  buyerId: '10:123456789',
-  orderNumber: 'REF-ORD-1',
-});
-// Alias still available: client.receipts.refund('RX-123', payload)
 ```
 
 #### Send receipt via email

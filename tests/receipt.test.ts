@@ -104,40 +104,6 @@ describe('ReceiptResource.finalizeAdvance()', () => {
   });
 });
 
-// ─── POST /receipt/{invoiceNumber}/refund/full ──────────────────────────────
-
-describe('ReceiptResource.fullRefund()', () => {
-  const FULL_REFUND_PAYLOAD = { buyerId: '10:123456789' };
-
-  it('returns refund receipt on 201', async () => {
-    const result = await validClient.receipts.fullRefund('RX-123', FULL_REFUND_PAYLOAD);
-    expect(result.correlationId).toBe('corr-refund');
-    expect(result.receipt.invoiceNumber).toBe('RX-123-REFUND');
-    expect(result.receipt.transactionType).toBe('refund');
-  });
-
-  it('throws FiscommApiError with status 401 for invalid API key', async () => {
-    await expect(invalidClient.receipts.fullRefund('RX-123', FULL_REFUND_PAYLOAD))
-      .rejects.toMatchObject({ status: 401 });
-  });
-});
-
-describe('ReceiptResource.refund()', () => {
-  const FULL_REFUND_PAYLOAD = { buyerId: '10:123456789' };
-
-  it('returns refund receipt on 201', async () => {
-    const result = await validClient.receipts.refund('RX-123', FULL_REFUND_PAYLOAD);
-    expect(result.correlationId).toBe('corr-refund');
-    expect(result.receipt.invoiceNumber).toBe('RX-123-REFUND');
-    expect(result.receipt.transactionType).toBe('refund');
-  });
-
-  it('throws FiscommApiError with status 401 for invalid API key', async () => {
-    await expect(invalidClient.receipts.refund('RX-123', FULL_REFUND_PAYLOAD))
-      .rejects.toMatchObject({ status: 401 });
-  });
-});
-
 // ─── POST /receipt/send-email ─────────────────────────────────────────────────
 
 describe('ReceiptResource.sendEmail()', () => {
