@@ -24,6 +24,9 @@ export interface CreateReceiptSettingsDto {
   /** Email to send the receipt to immediately on creation */
   sendToEmail?: string;
   orderNumberUnderReceipt?: boolean;
+  skipBuyerIdValidation?: boolean;
+  /** Final NORMAL/SALE receipt created after advance refund */
+  isFinal?: boolean;
 }
 
 export interface WebhookConfigDto {
